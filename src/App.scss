@@ -1,0 +1,25 @@
+@import 'default-style';
+
+.app-wrapper{
+  display: grid;
+  width: 600px;
+  height: 500px;
+  background: aqua;
+  margin: 200px auto;
+  grid-template-areas:
+  "header header"
+  "navbar content";
+  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 70px 1fr;
+}
+
+.contentContainer{
+  grid-area: content;
+  background: aliceblue;
+}
+
+h1{
+  font-size: 1.75rem;
+  text-align: center;
+  margin: 10px;
+}
