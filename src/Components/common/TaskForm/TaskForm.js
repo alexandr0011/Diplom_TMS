@@ -1,7 +1,7 @@
 import './TaskForm.scss'
 import {useState} from "react";
 
-export const TaskForm = ({onSubmit}) => {
+export const TaskForm = ({onSubmit, onFormClose}) => {
     const [title, setTitle] = useState('')
     const [message, setMessage] = useState('')
 
@@ -34,7 +34,8 @@ export const TaskForm = ({onSubmit}) => {
                     <textarea value={message} onChange={textInputHandler} placeholder={'Notes text'} rows='5' cols='23'/>
                 </div>
             </div>
-            <button>Confirm</button>
+            <button type='submit'>Confirm</button>
+            <button type='button' onClick={onFormClose}>Close</button>
         </form>
     )
 }

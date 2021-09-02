@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './NewTask.scss'
 
 export const NewTask = (props) => {
@@ -13,4 +14,10 @@ export const NewTask = (props) => {
             </div>
         </div>
     )
+}
+
+NewTask.propTypes = {
+    title: PropTypes.string,
+    message: PropTypes.string,
+    status: PropTypes.bool
 }
