@@ -1,22 +1,18 @@
 import './App.scss';
-import {Navbar} from "./Components/Nav/Navbar";
-import {Header} from "./Components/Header/Header";
-import {Content} from "./Components/Content/Content";
-import {Login} from "./Components/Login/Login";
-import {BrowserRouter, Redirect, Route} from "react-router-dom";
-import {data} from "./data";
+import {Header} from "./components/Header/Header";
+import {Login} from "./components/LoginPage/Login";
+import {Register} from "./components/RegisterPage/Register";
+import {TasksPage} from "./components/TasksPage/TasksPage";
+import {BrowserRouter, Route} from "react-router-dom";
 
-export const App = (props) => {
+export const App = () => {
   return (
       <BrowserRouter>
-          <div className="app-wrapper">
-              <Route path='/'> <Redirect to='/login'/> </Route>
+          <div>
               <Header/>
-              <Navbar/>
-              <div className={'contentContainer'}>
-                  <Route path='/login' render={() => <Login/>}/>
-                  <Route path='/content' render={() => <Content data={data}/>}/>
-              </div>
+              <Route path='/login' render={() => <Login/>}/>
+              <Route path='/register' render={() => <Register/>}/>
+              <Route path='/tasksPage' render={() => <TasksPage/>}/>
           </div>
       </BrowserRouter>
   );
