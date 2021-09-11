@@ -1,0 +1,13 @@
+.notificationWrapper {
+  width: 150px;
+  height: 50px;
+  padding: 5px;
+  border: 2px red solid;
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}

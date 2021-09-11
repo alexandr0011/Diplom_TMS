@@ -1,8 +1,17 @@
-import {COMPLETE_TASK, CREATE_TASK, DELETE_TASK, FETCH_TASK, LOGIN_USER, LOGOUT_USER} from "./actionTypes";
+import {
+    COMPLETE_TASK,
+    CREATE_TASK,
+    DELETE_TASK,
+    FETCH_TASK,
+    LOGIN_USER,
+    LOGOUT_USER,
+    TOGGLE_IS_FETCHING
+} from "./actionTypes";
 
 const initialState = {
     tasks: [],
     isAuth: false,
+    isFetching: false
 };
 
 export const reducer = (state = initialState, action) => {
@@ -26,8 +35,8 @@ export const reducer = (state = initialState, action) => {
     }
     if (action.type === CREATE_TASK) {
         return {
-            tasks: [action.newTask],
-            ...state
+            ...state,
+            tasks: [action.newTask, ...state.tasks],
         }
     }
     if (action.type === DELETE_TASK) {
@@ -41,10 +50,16 @@ export const reducer = (state = initialState, action) => {
             ...state,
             tasks: state.tasks.map((task) => {
                 if (task._id === action.taskId) {
-                    task.complete = action.isCompleted
+                    task.completed = action.isCompleted
                 }
                 return task;
             })
+        };
+    }
+    if (action.type === TOGGLE_IS_FETCHING) {
+        return {
+            ...state,
+            isFetching: action.isFetching
         };
     }
     return state

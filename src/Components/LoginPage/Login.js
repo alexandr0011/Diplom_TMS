@@ -1,15 +1,24 @@
 import {loginUserThunk} from "../../service/middleware";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
+import {Loader} from "../common/loader/loader";
 
 export const Login = () => {
 
-    const isAuth = useSelector((state) => state.isAuth)
+    const isAuth = useSelector((state) => state.isAuth);
+    const isFetching = useSelector((state) => state.isFetching);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        window.addEventListener('enter', onSubmitHandler);
+
+        return () => {
+            window.addEventListener('enter', onSubmitHandler);
+        }
+    }, []);
 
     const emailInputHandler = (event) => {
         setEmail(event.target.value);
@@ -30,6 +39,7 @@ export const Login = () => {
 
     return(
         <>
+            {isFetching && <Loader/>}
             <h1>LOGIN PAGE</h1>
             <form onSubmit={onSubmitHandler}>
                 <div>

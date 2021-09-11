@@ -3,7 +3,7 @@ import {
     CREATE_TASK,
     DELETE_TASK,
     FETCH_TASK,
-    LOGIN_USER, LOGOUT_USER,
+    LOGIN_USER, LOGOUT_USER, TOGGLE_IS_FETCHING,
 } from "./actionTypes";
 
 export const createTaskAction = (newTask) => ({
@@ -35,4 +35,9 @@ export const loginUserAction = (isAuth) => ({
 export const logoutUserAction = (isAuth) => ({
     type: LOGOUT_USER,
     isAuth
+})
+
+export const toggleIsFetchingAction = (isFetching) => ({
+    type: TOGGLE_IS_FETCHING,
+    isFetching
 })

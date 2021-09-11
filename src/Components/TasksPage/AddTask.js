@@ -6,6 +6,7 @@ export const AddTask = () => {
 
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
+    const [openForm, setOpenForm] = useState(false)
     const dispatch = useDispatch();
 
     const nameInputHandler = (event) => {
@@ -19,24 +20,37 @@ export const AddTask = () => {
     const submitHandler = (event) => {
         event.preventDefault();
         dispatch(createTaskThunk(taskName, taskDescription));
-        setTaskName('');
-        setTaskDescription('');
+        closeFormHandler();
     }
 
+    const openFormHandler = () => {
+        setOpenForm(true);
+    }
+
+    const closeFormHandler = () => {
+        setTaskName('');
+        setTaskDescription('');
+        setOpenForm(false);
+    }
 
     return(
-        <form onSubmit={submitHandler}>
-            <div><input type="text"
-                        placeholder='Enter task name'
-                        onChange={nameInputHandler}/>
-            </div>
-            <div><input type="text"
-                        placeholder='Enter task description'
-                        onChange={descriptionInputHandler}/>
-            </div>
-            <div>
-                <button type='submit'>OK</button>
-            </div>
-        </form>
+        <div>
+            {openForm && <form onSubmit={submitHandler}>
+                <div><input type="text"
+                            placeholder='Enter task name'
+                            onChange={nameInputHandler} value={taskName}/>
+                </div>
+                <div><input type="text"
+                            placeholder='Enter task description'
+                            onChange={descriptionInputHandler} value={taskDescription}/>
+                </div>
+                <div>
+                    <button type='submit'>OK</button>
+                    <button onClick={closeFormHandler}>Close</button>
+                </div>
+            </form>}
+            {!openForm && <button onClick={openFormHandler}>Add Task</button>}
+        </div>
+
     )
 }

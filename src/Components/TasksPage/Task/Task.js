@@ -1,13 +1,15 @@
-import PropTypes from 'prop-types';
-import './Task.scss'
+import PropTypes from "prop-types";
+import "./Task.scss";
 import {useDispatch} from "react-redux";
 import {completeTaskThunk, deleteTaskThunk} from "../../../service/middleware";
 
-export const Task = ({id, name, description, completed}) => {
+export const Task = ({id, name, description, completed, removeTask}) => {
 
     const dispatch = useDispatch();
+
     const removeHandler = () => {
         dispatch(deleteTaskThunk(id));
+        removeTask(id, name);
     }
 
     const completeHandler = () => {
@@ -32,5 +34,6 @@ Task.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired
+    completed: PropTypes.bool.isRequired,
+    removeTask: PropTypes.func.isRequired
 }
