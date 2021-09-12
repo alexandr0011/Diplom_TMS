@@ -5,11 +5,13 @@ import {
     FETCH_TASK,
     LOGIN_USER,
     LOGOUT_USER,
+    SERVICE_ERRORS,
     TOGGLE_IS_FETCHING
 } from "./actionTypes";
 
 const initialState = {
     tasks: [],
+    errors: [],
     isAuth: false,
     isFetching: false
 };
@@ -60,6 +62,12 @@ export const reducer = (state = initialState, action) => {
         return {
             ...state,
             isFetching: action.isFetching
+        };
+    }
+    if (action.type === SERVICE_ERRORS) {
+        return {
+            ...state,
+            errors: [action.errorMessage]
         };
     }
     return state

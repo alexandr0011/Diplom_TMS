@@ -8,16 +8,19 @@ export const Header = () => {
     const isAuth = useSelector((state) => state.isAuth);
     const dispatch = useDispatch();
 
+    const userName = localStorage.getItem('userName');
+
     const logoutHandler = () => {
         dispatch(logoutUserThunk());
     }
 
     return(
         <header className='headerContainer'>
-            <ul>
-                <li><NavLink to={'/login'}>LOGIN</NavLink></li>
-                <li><NavLink to={'/register'}>REGISTER</NavLink></li>
-                <li><NavLink to={'/tasksPage'}>TASKS</NavLink></li>
+            <ul className='headerLinks'>
+                {!isAuth && <li><NavLink to={'/login'}>LOGIN</NavLink></li>}
+                {!isAuth && <li><NavLink to={'/register'}>REGISTER</NavLink></li>}
+                {isAuth && <li><NavLink to={'/tasksPage'}>TASKS</NavLink></li>}
+                {isAuth && <p className='userName'>Hello {userName}</p>}
                 {isAuth && <button onClick={logoutHandler}>LOGOUT</button>}
             </ul>
         </header>

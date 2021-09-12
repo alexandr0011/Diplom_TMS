@@ -5,11 +5,16 @@ import {useEffect} from "react";
 
 export const Notification = ({name, onClose}) => {
 
+    const closeNotification = () => {
+        onClose(false);
+    }
+
     const listener = (event) => {
         if (event.code === 'Escape') {
             onClose(false)
         }
     }
+
     useEffect(() => {
         window.addEventListener('keydown', listener);
 
@@ -18,10 +23,18 @@ export const Notification = ({name, onClose}) => {
         }
     });
 
+    useEffect(() => {
+        setTimeout(closeNotification, 3000);
+
+        return () => {
+            clearTimeout(closeNotification);
+        }
+    })
+
 
     return(
         ReactDom.createPortal((<div className='notificationWrapper'>
-            <div>Remove {name} task</div>
+            <div>Remove <strong>{name}</strong> task</div>
             <div onClick={onClose}>X</div>
         </div>), document.body)
 

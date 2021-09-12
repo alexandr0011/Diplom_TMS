@@ -13,19 +13,19 @@ import {
     deleteTaskAction,
     fetchTaskAction,
     loginUserAction,
-    logoutUserAction, toggleIsFetchingAction
+    logoutUserAction,
+    setServiceErrorsAction,
+    toggleIsFetchingAction
 } from "../Redux/actions";
-import {v4} from "uuid";
 
 export const fetchTaskThunk = () => async (dispatch) => {
     const token = localStorage.getItem('token');
     const tasks = await fetchTaskService(token);
-    console.log(tasks)
     try {
         dispatch(toggleIsFetchingAction(true));
         dispatch(fetchTaskAction(tasks));
     }catch (error) {
-        console.log(error);
+        dispatch(setServiceErrorsAction(error.message));
     }finally {
         dispatch(toggleIsFetchingAction(false));
     }
@@ -33,7 +33,6 @@ export const fetchTaskThunk = () => async (dispatch) => {
 
 export const createTaskThunk = (newTaskName, newTaskDescription) => async (dispatch) => {
     const newTaskItem = {
-        id: v4(),
         name: newTaskName,
         description: newTaskDescription,
         isCompleted: false
@@ -41,11 +40,10 @@ export const createTaskThunk = (newTaskName, newTaskDescription) => async (dispa
     const token = localStorage.getItem('token');
     try{
         dispatch(toggleIsFetchingAction(true));
-        await createTaskService(newTaskItem, token);
-        dispatch(createTaskAction(newTaskItem));
-        console.log(newTaskItem)
+        const response = await createTaskService(newTaskItem, token);
+        dispatch(createTaskAction(response));
     }catch (error) {
-        console.log(error);
+        dispatch(setServiceErrorsAction(error.message));
     }finally {
         dispatch(toggleIsFetchingAction(false));
     }
@@ -58,7 +56,7 @@ export const completeTaskThunk = (taskId, isCompleted) => async (dispatch) => {
         await completeTaskService(taskId, {completed: isCompleted} , token);
         dispatch(completeTaskAction(taskId, isCompleted));
     }catch (error) {
-        console.log(error);
+        dispatch(setServiceErrorsAction(error.message));
     }finally {
         dispatch(toggleIsFetchingAction(false));
     }
@@ -71,7 +69,7 @@ export const deleteTaskThunk = (taskId) => async (dispatch) => {
         await deleteTaskService(taskId, token);
         dispatch(deleteTaskAction(taskId));
     }catch (error) {
-        console.log(error);
+        dispatch(setServiceErrorsAction(error.message));
     }finally {
         dispatch(toggleIsFetchingAction(false));
     }
@@ -87,9 +85,8 @@ export const registerUserThunk = (name, email, password) => async (dispatch) => 
         dispatch(toggleIsFetchingAction(true));
         const response = await registerUserService(newUser);
         dispatch(loginUserAction(response.user));
-        console.log(response)
     }catch (error) {
-        console.log(error);
+        dispatch(setServiceErrorsAction(error.message));
     }finally {
         dispatch(toggleIsFetchingAction(false));
     }
@@ -107,7 +104,7 @@ export const loginUserThunk = (email, password) => async (dispatch) => {
         localStorage.setItem('userName', response.user.name);
         dispatch(loginUserAction());
     }catch (error) {
-        console.log(error);
+        dispatch(setServiceErrorsAction(error.message));
     }finally {
         dispatch(toggleIsFetchingAction(false));
     }
@@ -122,7 +119,7 @@ export const logoutUserThunk = () => async (dispatch) => {
         localStorage.removeItem('userName');
         dispatch(logoutUserAction());
     }catch (error) {
-        console.log(error);
+        dispatch(setServiceErrorsAction(error.message));
     }finally {
         dispatch(toggleIsFetchingAction(false));
     }

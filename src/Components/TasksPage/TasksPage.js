@@ -1,7 +1,8 @@
+import "./TasksPage.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTaskThunk} from "../../service/middleware";
 import {Redirect} from "react-router-dom";
-import {AddTask} from "./AddTask";
+import {AddTaskModal} from "./AddTaskModal/AddTaskModal";
 import {Task} from "./Task/Task";
 import {useEffect, useState} from "react";
 import {Notification} from "./Notification/Notification";
@@ -15,7 +16,7 @@ export const TasksPage = () => {
     const [removeTaskName, setRemoveTaskName] = useState('')
 
     const dispatch = useDispatch();
-    useEffect(() => { /// не забыть проверку на токен, если нет токена то редирект на логин
+    useEffect(() => {
         dispatch(fetchTaskThunk())
     }, [dispatch])
 
@@ -30,18 +31,14 @@ export const TasksPage = () => {
         setRemoveTask(false);
     }
 
-    console.log(tasks)
-
     if (!isAuth) return <Redirect to='/login'/>
 
     return(
-        <div>
+        <div className='tasksPageWrapper'>
             {isFetching && <Loader/>}
-            <div>
-                Hello
-            </div>
             <h1>CURRENT TASKS</h1>
-            <div>
+            <AddTaskModal/>
+            <div className='tasksListWrapper'>
                 {tasks.map((task) => (
                     <Task id={task._id}
                           name={task.name}
@@ -50,7 +47,6 @@ export const TasksPage = () => {
                           key={task._id}
                           removeTask={showNotificationHandler}/>
                 ))}
-                <AddTask/>
             </div>
             {removeTask && <Notification name={removeTaskName}
                                          onClose={closeNotificationHandler}/>}

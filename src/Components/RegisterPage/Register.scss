@@ -1,0 +1,37 @@
+.registerWrapper{
+  background: rgba(255, 255, 255, 0.4);
+  h1{
+    padding: 5px;
+  }
+  input{
+    margin: 5px 20px;
+    border: 2px solid #ced4da;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+    background-color: #fff;
+    width: 20rem;
+  }
+  button{
+    margin: 10px 20px;
+    font-size: 14px;
+    background: #79c3e1;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+  }
+  button:hover{
+    background: #93dbe9;
+  }
+  input:hover, input:focus{
+    border: 2px solid #93dbe9;
+  }
+  p{
+    margin: 0px 20px;
+    font-size: 18px;
+  }
+  .serviceErrorMessage{
+    margin: 10px 0px 5px 20px;
+    color: rgba(255, 0, 0, 0.51);
+    font-weight: bold;
+    font-size: 16px;
+  }
+}

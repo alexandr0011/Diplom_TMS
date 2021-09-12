@@ -1,4 +1,31 @@
 .headerContainer {
-  height: 100px;
-  background: #eee;
+  height: 50px;
+  background: #252b31;
+  ul {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  a {
+    color: #79c3e1;
+    font-size: 18px;
+  }
+  a:hover {
+    text-decoration: underline #93dbe9;
+    color: #93dbe9;
+  }
+  button {
+    background: none;
+    font-size: 18px;
+    color: #79c3e1;
+  }
+  button:hover {
+    text-decoration: underline #93dbe9;
+    color: #93dbe9;
+  }
+  .userName {
+    font-size: 18px;
+    color: #79c3e1;
+    text-transform: uppercase;
+  }
 }
