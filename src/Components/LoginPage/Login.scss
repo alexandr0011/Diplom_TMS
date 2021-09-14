@@ -1,34 +1,35 @@
-.loginWrapper{
+.loginWrapper {
   background: rgba(255, 255, 255, 0.4);
-  h1{
+  h1 {
     padding: 5px;
   }
-  input{
+  input {
     margin: 5px 20px;
     border: 2px solid #ced4da;
-    border-radius: .25rem;
-    padding: .375rem .75rem;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
     background-color: #fff;
     width: 20rem;
   }
-  button{
+  button {
     margin: 10px 20px;
     font-size: 14px;
     background: #79c3e1;
-    border-radius: .25rem;
-    padding: .375rem .75rem;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
   }
-  button:hover{
+  button:hover {
     background: #93dbe9;
   }
-  input:hover, input:focus{
+  input:hover,
+  input:focus {
     border: 2px solid #93dbe9;
   }
-  p{
+  p {
     margin: 0px 20px;
     font-size: 18px;
   }
-  .serviceErrorMessage{
+  .serviceErrorMessage {
     margin: 10px 0px 5px 20px;
     color: rgba(255, 0, 0, 0.51);
     font-weight: bold;
