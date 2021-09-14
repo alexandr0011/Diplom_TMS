@@ -1,0 +1,108 @@
+{
+  "extends": ["react-app", "airbnb", "plugin:jsx-a11y/recommended", "prettier"],
+  "plugins": ["jsx-a11y", "prettier"],
+  "rules": {
+    "consistent-return": "off",
+    "class-methods-use-this": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/named": "error",
+    "import/no-unresolved": "error",
+    "import/no-cycle": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "import/prefer-default-export": "off",
+    "no-restricted-globals": "off",
+    "react/button-has-type": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/no-did-update-set-state": "off",
+    "react/sort-comp": "off",
+    "arrow-parens": ["error", "always"],
+    "react/display-name": "off",
+    "react/forbid-prop-types": ["off", { "forbid": ["any", "array"] }],
+    "react/prop-types": ["error", { "ignore": ["children"] }],
+    "react/no-unused-prop-types": ["error", { "skipShapeProps": true }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-no-bind": [
+      "error",
+      {
+        "ignoreRefs": true,
+        "allowArrowFunctions": false,
+        "allowBind": false,
+      }
+    ],
+    "react/state-in-constructor": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/static-property-placement": "off",
+    "react/no-unused-state": "off",
+    "react/no-unescaped-entities": "off",
+    "react/destructuring-assignment": ["off", "always", { "ignoreClassFields": true }],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ],
+    "no-async-promise-executor": ["off"],
+    "no-return-assign": ["error", "except-parens"],
+    "no-use-before-define": ["error", { "classes": false }],
+    "max-classes-per-file": ["off"],
+    "curly": ["error", "all"],
+    "lines-between-class-members": ["error", "always"],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": ["block-like", "import"],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["block", "block-like", "class", "export", "expression", "return", "throw"]
+      },
+      {
+        "blankLine": "never",
+        "prev": "*",
+        "next": ["case", "default"]
+      },
+      {
+        "blankLine": "never",
+        "prev": "import",
+        "next": "import"
+      },
+      {
+        "blankLine": "always",
+        "prev": "const",
+        "next": "let"
+      },
+      {
+        "blankLine": "always",
+        "prev": "let",
+        "next": "const"
+      },
+      {
+        "blankLine": "any",
+        "prev": "expression",
+        "next": "expression"
+      }
+    ],
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }]
+  }
+}
