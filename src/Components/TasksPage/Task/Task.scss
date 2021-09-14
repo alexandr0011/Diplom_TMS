@@ -1,0 +1,21 @@
+.taskWrapper {
+  margin: 5px 20px;
+  border-radius: .25rem;
+  border: 2px solid #ced4da;
+  padding: .375rem .75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  .taskContent {
+    overflow-wrap: anywhere;
+    max-width: 550px;
+  }
+  input {
+    width: 20px;
+  }
+  span {
+    font-weight: bold;
+    color: #79c3e1;
+  }
+}
