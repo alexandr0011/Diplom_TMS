@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { useEffect } from 'react';
 
-export const Notification = ({ name, onClose }) => {
-  const closeNotification = () => {
-    onClose(false);
+export const Notification = (props) => {
+  const onCloseHandler = () => {
+    props.onClose();
   };
 
   const listener = (event) => {
     if (event.code === 'Escape') {
-      onClose(false);
+      props.onClose();
     }
   };
 
@@ -23,25 +23,22 @@ export const Notification = ({ name, onClose }) => {
   });
 
   useEffect(() => {
-    setTimeout(closeNotification, 3000);
+    setTimeout(onCloseHandler, 3000);
 
     return () => {
-      clearTimeout(closeNotification);
+      clearTimeout(onCloseHandler);
     };
   });
 
   return ReactDom.createPortal(
     <div className="notificationWrapper">
-      <div>
-        Remove <strong>{name}</strong> task
-      </div>
-      <div onClick={onClose}>X</div>
+      {props.children}
+      <div onClick={onCloseHandler}>X</div>
     </div>,
     document.body,
   );
 };
 
 Notification.propTypes = {
-  name: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };

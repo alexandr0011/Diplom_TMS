@@ -1,8 +1,8 @@
 import './App.scss';
 import { Header } from './components/Header/Header';
 import { Login } from './components/LoginPage/Login';
-import { Register } from './components/RegisterPage/Register';
 import { TasksPage } from './components/TasksPage/TasksPage';
+import { Register } from './components/RegisterPage/Register';
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import background2 from './assets/img/background2.jpg';
 

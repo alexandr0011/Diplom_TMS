@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { Loader } from '../common/loader/loader';
 import './Login.scss';
 import { setServiceErrorsAction } from '../../Redux/actions';
+import { Button, Input } from '../common/formControls/formControls';
+const TASKS_PAGE = '/tasksPage';
 
 export const Login = () => {
   const isAuth = useSelector((state) => state.isAuth);
@@ -35,7 +37,7 @@ export const Login = () => {
     setPassword('');
   };
 
-  if (isAuth) return <Redirect to="/tasksPage" />;
+  if (isAuth) return <Redirect to={TASKS_PAGE} />;
 
   return (
     <div className="loginWrapper">
@@ -44,7 +46,7 @@ export const Login = () => {
       <form onSubmit={onSubmitHandler}>
         <p>Email</p>
         <div>
-          <input
+          <Input
             placeholder="Email"
             type="text"
             value={email}
@@ -53,7 +55,7 @@ export const Login = () => {
         </div>
         <p>Password</p>
         <div>
-          <input
+          <Input
             placeholder="Password"
             type="password"
             value={password}
@@ -62,7 +64,7 @@ export const Login = () => {
         </div>
         {serviceError && <div className="serviceErrorMessage">{serviceError}</div>}
         <div>
-          <button type="submit">Confirm</button>
+          <Button type="submit">Confirm</Button>
         </div>
       </form>
     </div>

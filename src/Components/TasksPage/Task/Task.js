@@ -3,6 +3,7 @@ import './Task.scss';
 import { useDispatch } from 'react-redux';
 import { completeTaskThunk, deleteTaskThunk } from '../../../service/middleware';
 import { useState } from 'react';
+import { Button } from '../../common/formControls/formControls';
 
 export const Task = ({ id, name, description, completed, removeTask }) => {
   const [showMessage, setShowMessage] = useState(false);
@@ -13,8 +14,8 @@ export const Task = ({ id, name, description, completed, removeTask }) => {
     removeTask(id, name);
   };
 
-  const completeHandler = () => {
-    dispatch(completeTaskThunk(id, !completed));
+  const completeHandler = (event) => {
+    dispatch(completeTaskThunk(id, event.target.checked));
   };
 
   const showTaskMessage = () => {
@@ -24,20 +25,27 @@ export const Task = ({ id, name, description, completed, removeTask }) => {
   return (
     <div className="taskWrapper">
       <div className="taskContent">
-        {!completed ? (
-          <p onClick={showTaskMessage}>TITLE</p>
-        ) : (
-          <p onClick={showTaskMessage}>
-            TITLE <span>Выполнено</span>
-          </p>
-        )}
+        <p onClick={showTaskMessage}>
+          {!completed ? (
+            <>TITLE</>
+          ) : (
+            <>
+              TITLE <span>Выполнено</span>
+            </>
+          )}
+        </p>
+
         <div onClick={showTaskMessage}>{name}</div>
-        {showMessage && <p>MESSAGE</p>}
-        {showMessage && <div>{description}</div>}
+        {showMessage && (
+          <>
+            <p>MESSAGE</p>
+            <div>{description}</div>
+          </>
+        )}
       </div>
       <div>
         <input type="checkbox" checked={completed} onChange={completeHandler} />
-        <button onClick={removeHandler}>Remove</button>
+        <Button onClick={removeHandler}>Remove</Button>
       </div>
     </div>
   );

@@ -1,13 +1,4 @@
 import {
-  completeTaskService,
-  createTaskService,
-  deleteTaskService,
-  fetchTaskService,
-  loginUserService,
-  logoutUserService,
-  registerUserService,
-} from './service';
-import {
   completeTaskAction,
   createTaskAction,
   deleteTaskAction,
@@ -17,6 +8,16 @@ import {
   setServiceErrorsAction,
   toggleIsFetchingAction,
 } from '../Redux/actions';
+
+import {
+  completeTaskService,
+  createTaskService,
+  deleteTaskService,
+  fetchTaskService,
+  loginUserService,
+  logoutUserService,
+  registerUserService,
+} from './service';
 
 export const fetchTaskThunk = () => async (dispatch) => {
   const token = localStorage.getItem('token');

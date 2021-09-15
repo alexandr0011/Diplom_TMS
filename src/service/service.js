@@ -30,12 +30,10 @@ export const createTaskService = async (task, token) => {
   return response.json();
 };
 
-export const completeTaskService = async (id, completed, token) => {
+export const deleteTaskService = async (id, token) => {
   const response = await fetch(`${URL}tasks/${id}`, {
-    method: 'PATCH',
-    body: JSON.stringify(completed),
+    method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
       Authorization: `Bearer ${token}`,
     },
   });
@@ -46,10 +44,12 @@ export const completeTaskService = async (id, completed, token) => {
   return response.json();
 };
 
-export const deleteTaskService = async (id, token) => {
+export const completeTaskService = async (id, completed, token) => {
   const response = await fetch(`${URL}tasks/${id}`, {
-    method: 'DELETE',
+    method: 'PATCH',
+    body: JSON.stringify(completed),
     headers: {
+      'Content-Type': 'application/json;charset=utf-8',
       Authorization: `Bearer ${token}`,
     },
   });

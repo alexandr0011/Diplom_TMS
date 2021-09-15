@@ -4,5 +4,5 @@ export const DELETE_TASK = 'delete_task';
 export const FETCH_TASK = 'fetch_task';
 export const LOGIN_USER = 'login_user';
 export const LOGOUT_USER = 'logout_user';
-export const TOGGLE_IS_FETCHING = 'toggle_is_fetching';
 export const SERVICE_ERRORS = 'service_errors';
+export const TOGGLE_IS_FETCHING = 'toggle_is_fetching';

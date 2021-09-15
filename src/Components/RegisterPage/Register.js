@@ -4,6 +4,8 @@ import { registerUserThunk } from '../../service/middleware';
 import './Register.scss';
 import { setServiceErrorsAction } from '../../Redux/actions';
 import { Redirect } from 'react-router-dom';
+import { Button, Input } from '../common/formControls/formControls';
+const TASKS_PAGE = '/tasksPage';
 
 export const Register = () => {
   const isAuth = useSelector((state) => state.isAuth);
@@ -39,7 +41,7 @@ export const Register = () => {
     setPassword('');
   };
 
-  if (isAuth) return <Redirect to="/tasksPage" />;
+  if (isAuth) return <Redirect to={TASKS_PAGE} />;
 
   return (
     <div className="registerWrapper">
@@ -47,7 +49,7 @@ export const Register = () => {
       <form onSubmit={onSubmitHandler}>
         <p>Enter your Name</p>
         <div>
-          <input
+          <Input
             placeholder="Name"
             type="text"
             value={name}
@@ -56,7 +58,7 @@ export const Register = () => {
         </div>
         <p>Enter your Email</p>
         <div>
-          <input
+          <Input
             placeholder="Email"
             type="text"
             value={email}
@@ -65,7 +67,7 @@ export const Register = () => {
         </div>
         <p>Enter your Password</p>
         <div>
-          <input
+          <Input
             placeholder="Password"
             type="password"
             value={password}
@@ -74,7 +76,7 @@ export const Register = () => {
         </div>
         {serviceError && <div className="serviceErrorMessage">{serviceError}</div>}
         <div>
-          <button>Confirm</button>
+          <Button type="submit">Confirm</Button>
         </div>
       </form>
     </div>
