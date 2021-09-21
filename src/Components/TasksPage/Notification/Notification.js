@@ -20,7 +20,7 @@ export const Notification = (props) => {
     return () => {
       window.addEventListener('keydown', listener);
     };
-  });
+  }, []);
 
   useEffect(() => {
     setTimeout(onCloseHandler, 3000);
@@ -28,7 +28,7 @@ export const Notification = (props) => {
     return () => {
       clearTimeout(onCloseHandler);
     };
-  });
+  }, []);
 
   return ReactDom.createPortal(
     <div className="notificationWrapper">

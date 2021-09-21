@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createTaskThunk } from '../../../service/middleware';
-import { Button, Input, Textarea } from '../../common/formControls/formControls';
+import { createTaskThunk } from '../../../service/middlewares/tasksThunk';
 import PropTypes from 'prop-types';
+import { Input } from '../../common/formControls/Input';
+import { Textarea } from '../../common/formControls/Textarea';
+import { Button } from '../../common/formControls/Button';
 
-export const AddTaskForm = ({ onFormOpen }) => {
+export const AddTaskForm = ({ onFormClose }) => {
   const [taskName, setTaskName] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
   const dispatch = useDispatch();
 
   const listenerEscape = (event) => {
     if (event.code === 'Escape') {
-      onFormOpen(false);
+      onFormClose(false);
     }
   };
 
@@ -40,7 +42,7 @@ export const AddTaskForm = ({ onFormOpen }) => {
   const closeFormHandler = () => {
     setTaskName('');
     setTaskDescription('');
-    onFormOpen(false);
+    onFormClose(false);
   };
 
   return (
@@ -71,5 +73,5 @@ export const AddTaskForm = ({ onFormOpen }) => {
 };
 
 AddTaskForm.propTypes = {
-  onFormOpen: PropTypes.func.isRequired,
+  onFormClose: PropTypes.func.isRequired,
 };

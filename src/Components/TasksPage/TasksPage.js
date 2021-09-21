@@ -1,23 +1,24 @@
 import './TasksPage.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTaskThunk } from '../../service/middleware';
+import { fetchTaskThunk } from '../../service/middlewares/tasksThunk';
 import { Redirect } from 'react-router-dom';
 import { AddTaskForm } from './AddTaskForm/AddTaskForm';
 import { Task } from './Task/Task';
 import { useEffect, useState } from 'react';
 import { Loader } from '../common/loader/loader';
 import { Modal } from '../common/modal/Modal';
-import { Button } from '../common/formControls/formControls';
 import { Notification } from './Notification/Notification';
 import { RemoveTaskNotification } from './Notification/RemoveTaskNotification';
-const LOGIN = '/login';
+import { LOGIN } from '../../constants/path';
+import { Button } from '../common/formControls/Button';
 
 export const TasksPage = () => {
-  const isAuth = useSelector((state) => state.isAuth);
-  const isFetching = useSelector((state) => state.isFetching);
-  const tasks = useSelector((state) => state.tasks);
-  const [openForm, setOpenForm] = useState(false);
-  const [removeTaskName, setRemovedTaskName] = useState('');
+  const state = useSelector((state) => state);
+  const isAuth = state.login.isAuth;
+  const isFetching = state.fetching.isFetching;
+  const tasks = state.tasks.tasks;
+  const [openForm, isFormOpened] = useState(false);
+  const [removedTaskName, setRemovedTaskName] = useState('');
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -35,7 +36,7 @@ export const TasksPage = () => {
   };
 
   const openFormHandler = () => {
-    setOpenForm(true);
+    isFormOpened(true);
   };
 
   if (!isAuth) return <Redirect to={LOGIN} />;
@@ -47,7 +48,7 @@ export const TasksPage = () => {
       <Button onClick={openFormHandler}>Add Task</Button>
       {openForm && (
         <Modal>
-          <AddTaskForm onFormOpen={setOpenForm} />
+          <AddTaskForm onFormClose={isFormOpened} />
         </Modal>
       )}
       <div className="tasksListWrapper">
@@ -62,9 +63,9 @@ export const TasksPage = () => {
           />
         ))}
       </div>
-      {removeTaskName && (
+      {removedTaskName && (
         <Notification onClose={closeNotificationHandler}>
-          <RemoveTaskNotification name={removeTaskName} />
+          <RemoveTaskNotification name={removedTaskName} />
         </Notification>
       )}
     </div>

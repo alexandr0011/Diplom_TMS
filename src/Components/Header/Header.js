@@ -1,9 +1,10 @@
 import './Header.scss';
 import { useSelector } from 'react-redux';
-import { AppLinks, LoginPageLinks } from './HeaderLinks/HeaderLinks';
+import { LoginPageLinks } from './HeaderLinks/LoginPageLinks';
+import { AppLinks } from './HeaderLinks/AppLinks';
 
 export const Header = () => {
-  const isAuth = useSelector((state) => state.isAuth);
+  const isAuth = useSelector((state) => state.login.isAuth);
 
   return (
     <header className="headerContainer">

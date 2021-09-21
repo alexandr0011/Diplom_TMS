@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUserThunk } from '../../service/middleware';
+import { registerUserThunk } from '../../service/middlewares/authThunk';
 import './Register.scss';
 import { setServiceErrorsAction } from '../../Redux/actions';
 import { Redirect } from 'react-router-dom';
-import { Button, Input } from '../common/formControls/formControls';
-const TASKS_PAGE = '/tasksPage';
+import { TASKS_PAGE } from '../../constants/path';
+import { Input } from '../common/formControls/Input';
+import { Button } from '../common/formControls/Button';
 
 export const Register = () => {
-  const isAuth = useSelector((state) => state.isAuth);
-  const serviceError = useSelector((state) => state.errors);
+  const state = useSelector((state) => state);
+  const isAuth = state.login.isAuth;
+  const serviceError = state.errors.errors;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

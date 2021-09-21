@@ -7,6 +7,7 @@ import {
   LOGOUT_USER,
   SERVICE_ERRORS,
   TOGGLE_IS_FETCHING,
+  USER_NAME,
 } from './actionTypes';
 
 export const createTaskAction = (newTask) => ({
@@ -48,4 +49,9 @@ export const toggleIsFetchingAction = (isFetching) => ({
 export const setServiceErrorsAction = (errorMessage) => ({
   type: SERVICE_ERRORS,
   errorMessage,
+});
+
+export const getUserNameAction = (userName) => ({
+  type: USER_NAME,
+  userName,
 });

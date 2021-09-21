@@ -1,17 +1,19 @@
-import { loginUserThunk } from '../../service/middleware';
+import { loginUserThunk } from '../../service/middlewares/authThunk';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Loader } from '../common/loader/loader';
 import './Login.scss';
 import { setServiceErrorsAction } from '../../Redux/actions';
-import { Button, Input } from '../common/formControls/formControls';
-const TASKS_PAGE = '/tasksPage';
+import { TASKS_PAGE } from '../../constants/path';
+import { Input } from '../common/formControls/Input';
+import { Button } from '../common/formControls/Button';
 
 export const Login = () => {
-  const isAuth = useSelector((state) => state.isAuth);
-  const isFetching = useSelector((state) => state.isFetching);
-  const serviceError = useSelector((state) => state.errors);
+  const state = useSelector((state) => state);
+  const isAuth = state.login.isAuth;
+  const isFetching = state.fetching.isFetching;
+  const serviceError = state.errors.errors;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
