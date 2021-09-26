@@ -14,3 +14,10 @@ This application helps users to create tasks, complete or/and delete them.
 - redux
 - redux-thunk
 - BrowserRouter
+
+## Project setup
+
+```
+npm install
+npm start
+```
