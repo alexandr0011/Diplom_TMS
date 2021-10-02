@@ -1,0 +1,25 @@
+.styledInput,
+.styledTextarea {
+  margin: 5px 20px;
+  border: 2px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  background-color: #fff;
+  width: 20rem;
+}
+.styledBtn {
+  margin: 10px 20px;
+  font-size: 14px;
+  background: #79c3e1;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+}
+.styledBtn:hover {
+  background: #93dbe9;
+}
+.styledInput:hover,
+.styledInput:focus,
+.styledTextarea:hover,
+.styledTextarea:focus {
+  border: 2px solid #93dbe9;
+}

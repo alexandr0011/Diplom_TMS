@@ -1,56 +1,73 @@
-import "./TasksPage.scss";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchTaskThunk} from "../../service/middleware";
-import {Redirect} from "react-router-dom";
-import {AddTaskModal} from "./AddTaskModal/AddTaskModal";
-import {Task} from "./Task/Task";
-import {useEffect, useState} from "react";
-import {Notification} from "./Notification/Notification";
-import {Loader} from "../common/loader/loader";
+import './TasksPage.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTaskThunk } from '../../service/middlewares/tasksThunk';
+import { Redirect } from 'react-router-dom';
+import { AddTaskForm } from './AddTaskForm/AddTaskForm';
+import { Task } from './Task/Task';
+import { useEffect, useState } from 'react';
+import { Loader } from '../common/loader/loader';
+import { Modal } from '../common/modal/Modal';
+import { Notification } from './Notification/Notification';
+import { RemoveTaskNotification } from './Notification/RemoveTaskNotification';
+import { LOGIN } from '../../constants/path';
+import { Button } from '../common/formControls/Button';
 
 export const TasksPage = () => {
-    const isAuth = useSelector((state) => state.isAuth);
-    const isFetching = useSelector((state) => state.isFetching);
-    const tasks = useSelector((state) => state.tasks);
-    const [removeTask, setRemoveTask] = useState(false);
-    const [removeTaskName, setRemoveTaskName] = useState('')
+  const state = useSelector((state) => state);
+  const isAuth = state.login.isAuth;
+  const isFetching = state.fetching.isFetching;
+  const tasks = state.tasks.tasks;
+  const [openForm, isFormOpened] = useState(false);
+  const [removedTaskName, setRemovedTaskName] = useState('');
 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchTaskThunk())
-    }, [dispatch])
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTaskThunk());
+  }, [dispatch]);
 
-    const showNotificationHandler = (taskId, taskName) => {
-        if(taskId !== '') {
-            setRemoveTask(true);
-        }
-        setRemoveTaskName(taskName);
+  const showNotificationHandler = (taskId, taskName) => {
+    if (taskId !== '') {
+      setRemovedTaskName(taskName);
     }
+  };
 
-    const closeNotificationHandler = () => {
-        setRemoveTask(false);
-    }
+  const closeNotificationHandler = () => {
+    setRemovedTaskName();
+  };
 
-    if (!isAuth) return <Redirect to='/login'/>
+  const openFormHandler = () => {
+    isFormOpened(true);
+  };
 
-    return(
-        <div className='tasksPageWrapper'>
-            {isFetching && <Loader/>}
-            <h1>CURRENT TASKS</h1>
-            <AddTaskModal/>
-            <div className='tasksListWrapper'>
-                {tasks.map((task) => (
-                    <Task id={task._id}
-                          name={task.name}
-                          description={task.description}
-                          completed={task.completed}
-                          key={task._id}
-                          removeTask={showNotificationHandler}/>
-                ))}
-            </div>
-            {removeTask && <Notification name={removeTaskName}
-                                         onClose={closeNotificationHandler}/>}
+  if (!isAuth) return <Redirect to={LOGIN} />;
 
-        </div>
-    )
-}
+  return (
+    <div className="tasksPageWrapper">
+      {isFetching && <Loader />}
+      <h1>CURRENT TASKS</h1>
+      <Button onClick={openFormHandler}>Add Task</Button>
+      {openForm && (
+        <Modal>
+          <AddTaskForm onFormClose={isFormOpened} />
+        </Modal>
+      )}
+      <div className="tasksListWrapper">
+        {tasks.map((task) => (
+          <Task
+            id={task._id}
+            name={task.name}
+            description={task.description}
+            completed={task.completed}
+            key={task._id}
+            removeTask={showNotificationHandler}
+          />
+        ))}
+      </div>
+      {removedTaskName && (
+        <Notification onClose={closeNotificationHandler}>
+          <RemoveTaskNotification name={removedTaskName} />
+        </Notification>
+      )}
+    </div>
+  );
+};
