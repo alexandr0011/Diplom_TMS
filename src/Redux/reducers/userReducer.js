@@ -1,4 +1,4 @@
-import { USER_NAME } from '../actionTypes';
+import { USER_NAME } from 'Redux/actionTypes';
 
 const initialState = {
   userName: null,

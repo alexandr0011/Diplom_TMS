@@ -1,13 +1,13 @@
-import { loginUserThunk } from '../../service/middlewares/authThunk';
+import { loginUserThunk } from 'service/middlewares/authThunk';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Loader } from '../common/loader/loader';
 import './Login.scss';
-import { setServiceErrorsAction } from '../../Redux/actions';
-import { TASKS_PAGE } from '../../constants/path';
-import { Input } from '../common/formControls/Input';
-import { Button } from '../common/formControls/Button';
+import { setServiceErrorsAction } from 'Redux/actions';
+import { TASKS_PAGE } from 'constants/path';
+import { Input } from 'components/common/formControls/Input';
+import { Button } from 'components/common/formControls/Button';
 
 export const Login = () => {
   const state = useSelector((state) => state);

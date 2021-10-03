@@ -4,10 +4,9 @@ import {
   logoutUserAction,
   setServiceErrorsAction,
   toggleIsFetchingAction,
-} from '../../Redux/actions';
+} from 'Redux/actions';
 
-import { logoutUserService, serverRequest } from '../service';
-import { URL } from '../../constants/path';
+import { loginUser, logoutUser, registerUser } from 'service/services/authService';
 
 export const registerUserThunk = (name, email, password) => async (dispatch) => {
   const newUser = {
@@ -17,13 +16,7 @@ export const registerUserThunk = (name, email, password) => async (dispatch) => 
   };
   try {
     dispatch(toggleIsFetchingAction(true));
-    const response = await serverRequest(`${URL}users/register`, {
-      method: 'POST',
-      body: JSON.stringify(newUser),
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    });
+    const response = await registerUser(newUser);
     localStorage.setItem('token', response.token);
     dispatch(getUserNameAction(response.user.name));
     dispatch(loginUserAction());
@@ -41,13 +34,7 @@ export const loginUserThunk = (email, password) => async (dispatch) => {
   };
   try {
     dispatch(toggleIsFetchingAction(true));
-    const response = await serverRequest(`${URL}users/login`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    });
+    const response = await loginUser(user);
     localStorage.setItem('token', response.token);
     dispatch(getUserNameAction(response.user.name));
     dispatch(loginUserAction());
@@ -59,10 +46,9 @@ export const loginUserThunk = (email, password) => async (dispatch) => {
 };
 
 export const logoutUserThunk = () => async (dispatch) => {
-  const token = localStorage.getItem('token');
   try {
     dispatch(toggleIsFetchingAction(true));
-    await logoutUserService(token);
+    await logoutUser();
     localStorage.removeItem('token');
     dispatch(getUserNameAction(null));
     dispatch(logoutUserAction());

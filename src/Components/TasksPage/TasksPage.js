@@ -1,6 +1,6 @@
 import './TasksPage.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTaskThunk } from '../../service/middlewares/tasksThunk';
+import { fetchTaskThunk } from 'service/middlewares/tasksThunk';
 import { Redirect } from 'react-router-dom';
 import { AddTaskForm } from './AddTaskForm/AddTaskForm';
 import { Task } from './Task/Task';
@@ -9,7 +9,7 @@ import { Loader } from '../common/loader/loader';
 import { Modal } from '../common/modal/Modal';
 import { Notification } from './Notification/Notification';
 import { RemoveTaskNotification } from './Notification/RemoveTaskNotification';
-import { LOGIN } from '../../constants/path';
+import { LOGIN } from 'constants/path';
 import { Button } from '../common/formControls/Button';
 
 export const TasksPage = () => {
@@ -22,7 +22,9 @@ export const TasksPage = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchTaskThunk());
+    if (isAuth) {
+      dispatch(fetchTaskThunk());
+    }
   }, [dispatch]);
 
   const showNotificationHandler = (taskId, taskName) => {
@@ -47,7 +49,7 @@ export const TasksPage = () => {
       <h1>CURRENT TASKS</h1>
       <Button onClick={openFormHandler}>Add Task</Button>
       {openForm && (
-        <Modal>
+        <Modal onModalClose={isFormOpened}>
           <AddTaskForm onFormClose={isFormOpened} />
         </Modal>
       )}

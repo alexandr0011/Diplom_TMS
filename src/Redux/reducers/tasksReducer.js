@@ -1,4 +1,4 @@
-import { CREATE_TASK, COMPLETE_TASK, DELETE_TASK, FETCH_TASK } from '../actionTypes';
+import { CREATE_TASK, COMPLETE_TASK, DELETE_TASK, FETCH_TASK } from 'Redux/actionTypes';
 
 const initialState = {
   tasks: [],

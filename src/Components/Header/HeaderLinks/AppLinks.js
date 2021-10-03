@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUserThunk } from '../../../service/middlewares/authThunk';
-import { TASKS_PAGE } from '../../../constants/path';
+import { logoutUserThunk } from 'service/middlewares/authThunk';
+import { TASKS_PAGE } from 'constants/path';
 
 export const AppLinks = () => {
   const dispatch = useDispatch();

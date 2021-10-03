@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import { fetchingReducer } from './reducers/fetchingReducer';
 import { errorsReducer } from './reducers/errorsReducer';
 import { loginReducer } from './reducers/loginReducer';
-import { tasksReducer } from './reducers/tasksReducer';
 import { userReducer } from './reducers/userReducer';
+import { tasksReducer } from './reducers/tasksReducer';
 
 const rootReducer = combineReducers({
   fetching: fetchingReducer,

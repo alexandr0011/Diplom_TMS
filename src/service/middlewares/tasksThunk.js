@@ -5,20 +5,18 @@ import {
   fetchTaskAction,
   setServiceErrorsAction,
   toggleIsFetchingAction,
-} from '../../Redux/actions';
+} from 'Redux/actions';
 
-import { serverRequest } from '../service';
-import { URL } from '../../constants/path';
+import {
+  addTask,
+  completeTask,
+  getTasks,
+  removeTask,
+} from 'service/services/tasksService';
 
 export const fetchTaskThunk = () => async (dispatch) => {
-  const token = localStorage.getItem('token');
   try {
-    const tasks = await serverRequest(`${URL}tasks`, {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const tasks = await getTasks();
     dispatch(toggleIsFetchingAction(true));
     dispatch(fetchTaskAction(tasks));
   } catch (error) {
@@ -34,17 +32,9 @@ export const createTaskThunk = (newTaskName, newTaskDescription) => async (dispa
     description: newTaskDescription,
     isCompleted: false,
   };
-  const token = localStorage.getItem('token');
   try {
     dispatch(toggleIsFetchingAction(true));
-    const response = await serverRequest(`${URL}tasks`, {
-      method: 'POST',
-      body: JSON.stringify(newTaskItem),
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await addTask(newTaskItem);
     dispatch(createTaskAction(response));
   } catch (error) {
     dispatch(setServiceErrorsAction(error.message));
@@ -54,17 +44,9 @@ export const createTaskThunk = (newTaskName, newTaskDescription) => async (dispa
 };
 
 export const completeTaskThunk = (taskId, isCompleted) => async (dispatch) => {
-  const token = localStorage.getItem('token');
   try {
     dispatch(toggleIsFetchingAction(true));
-    await serverRequest(`${URL}tasks/${taskId}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ completed: isCompleted }),
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    await completeTask(taskId, isCompleted);
     dispatch(completeTaskAction(taskId, isCompleted));
   } catch (error) {
     dispatch(setServiceErrorsAction(error.message));
@@ -74,15 +56,9 @@ export const completeTaskThunk = (taskId, isCompleted) => async (dispatch) => {
 };
 
 export const deleteTaskThunk = (taskId) => async (dispatch) => {
-  const token = localStorage.getItem('token');
   try {
     dispatch(toggleIsFetchingAction(true));
-    await serverRequest(`${URL}tasks/${taskId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    await removeTask(taskId);
     dispatch(deleteTaskAction(taskId));
   } catch (error) {
     dispatch(setServiceErrorsAction(error.message));

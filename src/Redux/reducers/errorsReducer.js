@@ -1,4 +1,4 @@
-import { SERVICE_ERRORS } from '../actionTypes';
+import { SERVICE_ERRORS } from 'Redux/actionTypes';
 
 const initialState = {
   errors: [],
