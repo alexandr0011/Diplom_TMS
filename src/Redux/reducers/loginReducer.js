@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER } from '../actionTypes';
+import { LOGIN_USER, LOGOUT_USER } from 'Redux/actionTypes';
 
 const initialState = {
   isAuth: false,

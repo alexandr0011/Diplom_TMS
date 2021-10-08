@@ -5,8 +5,8 @@ import {
   FETCH_TASK,
   LOGIN_USER,
   LOGOUT_USER,
-  SERVICE_ERRORS,
   TOGGLE_IS_FETCHING,
+  SERVICE_ERRORS,
   USER_NAME,
 } from './actionTypes';
 

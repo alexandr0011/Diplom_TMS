@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LOGIN, REGISTER } from '../../../constants/path';
+import { LOGIN, REGISTER } from 'constants/path';
 
 export const LoginPageLinks = () => {
   return (

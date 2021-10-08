@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import './Task.scss';
 import { useDispatch } from 'react-redux';
-import {
-  completeTaskThunk,
-  deleteTaskThunk,
-} from '../../../service/middlewares/tasksThunk';
+import { completeTaskThunk, deleteTaskThunk } from 'service/middlewares/tasksThunk';
 import { useState } from 'react';
-import { Button } from '../../common/formControls/Button';
+import { Button } from 'components/common/formControls/Button';
 
 export const Task = ({ id, name, description, completed, removeTask }) => {
   const [showMessage, setShowMessage] = useState(false);
@@ -33,7 +30,7 @@ export const Task = ({ id, name, description, completed, removeTask }) => {
             <>TITLE</>
           ) : (
             <>
-              TITLE <span>Выполнено</span>
+              TITLE <span>Done</span>
             </>
           )}
         </p>

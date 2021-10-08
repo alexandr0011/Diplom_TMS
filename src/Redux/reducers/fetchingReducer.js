@@ -1,4 +1,4 @@
-import { TOGGLE_IS_FETCHING } from '../actionTypes';
+import { TOGGLE_IS_FETCHING } from 'Redux/actionTypes';
 
 const initialState = {
   isFetching: false,

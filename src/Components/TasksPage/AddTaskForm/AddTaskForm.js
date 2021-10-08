@@ -1,29 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createTaskThunk } from '../../../service/middlewares/tasksThunk';
+import { createTaskThunk } from 'service/middlewares/tasksThunk';
 import PropTypes from 'prop-types';
-import { Input } from '../../common/formControls/Input';
-import { Textarea } from '../../common/formControls/Textarea';
-import { Button } from '../../common/formControls/Button';
+import { Input } from 'components/common/formControls/Input';
+import { Textarea } from 'components/common/formControls/Textarea';
+import { Button } from 'components/common/formControls/Button';
 
 export const AddTaskForm = ({ onFormClose }) => {
   const [taskName, setTaskName] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
   const dispatch = useDispatch();
-
-  const listenerEscape = (event) => {
-    if (event.code === 'Escape') {
-      onFormClose(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('keydown', listenerEscape);
-
-    return () => {
-      window.addEventListener('keydown', listenerEscape);
-    };
-  });
 
   const nameInputHandler = (event) => {
     setTaskName(event.target.value);

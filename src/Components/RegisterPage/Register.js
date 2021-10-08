@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUserThunk } from '../../service/middlewares/authThunk';
+import { registerUserThunk } from 'service/middlewares/authThunk';
 import './Register.scss';
-import { setServiceErrorsAction } from '../../Redux/actions';
+import { setServiceErrorsAction } from 'Redux/actions';
 import { Redirect } from 'react-router-dom';
-import { TASKS_PAGE } from '../../constants/path';
-import { Input } from '../common/formControls/Input';
-import { Button } from '../common/formControls/Button';
+import { TASKS_PAGE } from 'constants/path';
+import { Input } from 'components/common/formControls/Input';
+import { Button } from 'components/common/formControls/Button';
 
 export const Register = () => {
   const state = useSelector((state) => state);

@@ -1,4 +1,4 @@
-import loader from '../../../assets/img/loader.svg';
+import loader from 'assets/img/loader.svg';
 import './loader.scss';
 
 export const Loader = () => {

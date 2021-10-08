@@ -1,10 +1,10 @@
 import './App.scss';
-import { Header } from './components/Header/Header';
-import { Login } from './components/LoginPage/Login';
-import { Register } from './components/RegisterPage/Register';
-import { TasksPage } from './components/TasksPage/TasksPage';
+import { Header } from 'components/Header/Header';
+import { Login } from 'components/LoginPage/Login';
+import { Register } from 'components/RegisterPage/Register';
+import { TasksPage } from 'components/TasksPage/TasksPage';
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
-import background2 from './assets/img/background2.jpg';
+import background2 from 'assets/img/background2.jpg';
 
 export const App = () => {
   return (
