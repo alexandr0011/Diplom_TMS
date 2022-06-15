@@ -5,9 +5,6 @@
 ## Description: 
 This application helps users to create tasks, complete or/and delete them.
 
-# Demo:
-https://alexandr0011.github.io/Diplom_TMS/
-
 # Technologies:
 - Js
 - React
